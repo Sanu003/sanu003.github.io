@@ -1,4 +1,4 @@
-let enllac = location.href.substring(22,23)
+let enllac = location.href.substring(47,48)
 let imatgesenllac="./imatges/"
 
 console.log(location.href)
