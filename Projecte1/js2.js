@@ -1,5 +1,5 @@
 let div = document.getElementById("div1")
-let num = location.href.substring(30,31)
+let num = location.href.substring(44,45)
 console.log(num)
 CrearImatges()
 
