@@ -35,7 +35,6 @@ function CrearImatges(){
         if (enllac==""){
         var url = 'imatges/'+i+'.png'
         }else{
-            var url = 'imatges/'+num+'/'+i+'.png'
         }
         j.id=i
         try{
