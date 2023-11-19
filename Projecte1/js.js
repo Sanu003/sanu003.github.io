@@ -31,7 +31,7 @@ CrearImatges()
 //Crear Imatges/////////////////////////////////////////
 function CrearImatges(){
     let num = 0
-    for (let i =1; i<274; i++){
+    for (let i =1; i<279; i++){
         var j = document.createElement("img")
         if (enllac==""){
         var url = 'imatges/'+i+'.png'
