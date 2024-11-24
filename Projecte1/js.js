@@ -39,6 +39,7 @@ function CrearImatges(){
             var url = 'imatges/'+num+'/'+i+'.png'
         }
         j.id=i
+        j.loading = "lazy";
         try{
             j.src = url
         }catch{}     
