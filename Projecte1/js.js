@@ -90,7 +90,7 @@ function CrearImatges() {
                 }
             });
         }, {
-            rootMargin: '300px', // Activar la carga antes de que entre completamente en la vista
+            rootMargin: '1500px', // Activar la carga antes de que entre completamente en la vista
             threshold: 0 // Cargar la imagen cuando esté al 10% visible
         });
 
