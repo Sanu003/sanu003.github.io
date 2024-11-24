@@ -29,7 +29,7 @@ CrearImatges()
 
 
 //Crear Imatges/////////////////////////////////////////
-function CrearImatges(){
+/*function CrearImatges(){
     let num = 0
     for (let i =1; i<279; i++){
         var j = document.createElement("img")
@@ -56,5 +56,38 @@ function CrearImatges(){
             window.focus();
             pantalla.blur()
         }    
+    }
+}*/
+function CrearImatges() {
+    let num = 0;
+    let div = document.getElementById("div1");
+
+    for (let i = 1; i < 279; i++) {
+        // Crear una imagen en cada iteración con un pequeño retraso
+        setTimeout(function () {
+            var j = document.createElement("img");
+            var url;
+            if (enllac == "") {
+                url = 'imatges/' + i + '.png';
+            } else {
+                url = 'imatges/' + num + '/' + i + '.png';
+            }
+
+            j.id = i;
+            j.loading = "lazy"; // Carga perezosa
+            j.src = url;
+            j.width = 600;
+            j.height = 800;
+            j.style.marginLeft = "20px";
+            j.style.marginTop = "10px";
+            div.appendChild(j);
+
+            j.addEventListener("click", function () {
+                var pantalla = window.open("imatges/" + i + ".png", '_blank');
+                window.focus();
+                pantalla.blur();
+            });
+        }, i * 50); // 50ms de retraso entre cada imagen
+
     }
 }
