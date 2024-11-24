@@ -90,8 +90,8 @@ function CrearImatges() {
                 }
             });
         }, {
-            rootMargin: '200px', // Activar la carga antes de que entre completamente en la vista
-            threshold: 0.1 // Cargar la imagen cuando esté al 10% visible
+            rootMargin: '300px', // Activar la carga antes de que entre completamente en la vista
+            threshold: 0 // Cargar la imagen cuando esté al 10% visible
         });
 
         observer.observe(j); // Comienza a observar la imagen
