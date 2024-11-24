@@ -43,14 +43,14 @@ function CrearImatges(){
         try{
             j.src = url
         }catch{}     
-        if(j.height!=0){
+        //if(j.height!=0){
             j.width = 600
             j.height = 800
             j.style.marginLeft="20px"
             j.style.marginTop="10px"
             div.appendChild(j)
             j.addEventListener("click", algo)
-        }
+        //}
         function algo(){
             var pantalla= window.open("imatges/"+i+".png", '_blank')
             window.focus();
