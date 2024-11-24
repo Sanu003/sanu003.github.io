@@ -63,31 +63,37 @@ function CrearImatges() {
     let div = document.getElementById("div1");
 
     for (let i = 1; i < 279; i++) {
-        // Crear una imagen en cada iteración con un pequeño retraso
-        setTimeout(function () {
-            var j = document.createElement("img");
-            var url;
-            if (enllac == "") {
-                url = 'imatges/' + i + '.png';
-            } else {
-                url = 'imatges/' + num + '/' + i + '.png';
-            }
+        var j = document.createElement("img");
+        var url;
+        if (enllac == "") {
+            url = 'imatges/' + i + '.png';
+        } else {
+            url = 'imatges/' + num + '/' + i + '.png';
+        }
 
-            j.id = i;
-            j.loading = "lazy"; // Carga perezosa
-            j.src = url;
-            j.width = 600;
-            j.height = 800;
-            j.style.marginLeft = "20px";
-            j.style.marginTop = "10px";
-            div.appendChild(j);
+        j.id = i;
+        j.src = ''; // No cargar la imagen de inmediato
+        j.setAttribute("data-src", url); // Guardar la URL en un atributo personalizado
+        j.width = 600;
+        j.height = 800;
+        j.style.marginLeft = "20px";
+        j.style.marginTop = "10px";
+        div.appendChild(j);
 
-            j.addEventListener("click", function () {
-                var pantalla = window.open("imatges/" + i + ".png", '_blank');
-                window.focus();
-                pantalla.blur();
+        // Usamos IntersectionObserver para cargar la imagen cuando esté cerca de la pantalla
+        let observer = new IntersectionObserver(function(entries, observer) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Cargar la imagen cuando entra en la vista
+                    entry.target.src = entry.target.getAttribute("data-src");
+                    observer.unobserve(entry.target); // Dejar de observar la imagen una vez cargada
+                }
             });
-        }, i * 50); // 50ms de retraso entre cada imagen
+        }, {
+            rootMargin: '200px', // Activar la carga antes de que entre completamente en la vista
+            threshold: 0.1 // Cargar la imagen cuando esté al 10% visible
+        });
 
+        observer.observe(j); // Comienza a observar la imagen
     }
 }
