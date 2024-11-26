@@ -96,68 +96,41 @@ function CrearImatges() {
 
         observer.observe(j); // Comienza a observar la imagen
 
+        /**j.addEventListener("click", function () {
+            var pantalla = window.open('imatges/' + i + '.png', '_blank');
+            window.focus();
+            pantalla.blur();
+        });**/
         j.addEventListener("click", function () {
-            //var pantalla = window.open('imatges/' + i + '.png', '_blank');
-            //window.focus();
-            //pantalla.blur();
-            abrirImagen(i);
-        });
-    }
-}
-
-function abrirImagen(i) {
-    // Crear nueva ventana
-    const pantalla = window.open('imatges/' + i + '.png', "_blank");
-    pantalla.addEventListener("click", function () {
-        var pantalla = window.open('imatges/' + i+1 + '.png', '_blank');
-        window.focus();
-        pantalla.blur();
-    });
-    if (pantalla) {
-        // Inyectar contenido dinámico en la nueva ventana
-        const body = pantalla.document.body;
-        body.style.textAlign = "center";
-        body.style.fontFamily = "Arial";
-
-        // Imagen principal
-        const img = pantalla.document.createElement("img");
-        img.src = `imatges/${i}.png`;
-        img.id = "imagen";
-        img.style.maxWidth = "100%";
-        img.style.height = "auto";
-        body.appendChild(img);
-
-        // Botón para avanzar a la siguiente imagen
-        const nextButton = pantalla.document.createElement("button");
-        nextButton.textContent = "Siguiente";
-        nextButton.style.marginTop = "20px";
-        nextButton.style.marginRight = "10px";
-        body.appendChild(nextButton);
-
-        // Botón para regresar a la imagen anterior
-        const prevButton = pantalla.document.createElement("button");
-        prevButton.textContent = "Anterior";
-        prevButton.style.marginTop = "20px";
-        body.appendChild(prevButton);
-
-        // Actualizar título
-        pantalla.document.title = `Imagen ${i}`;
-
-        // Eventos para los botones
-        nextButton.addEventListener("click", function () {
-            i++;
-            img.src = `imatges/${i}.png`;
-            pantalla.document.title = `Imagen ${i}`;
-        });
-
-        prevButton.addEventListener("click", function () {
-            if (i > 1) {
-                i--;
-                img.src = `imatges/${i}.png`;
-                pantalla.document.title = `Imagen ${i}`;
+            let currentIndex = i; // Guardar el índice actual
+            const pantalla = window.open("", "_blank"); // Sin opciones, abre una pestaña
+        
+            if (pantalla) {
+                // Configurar el contenido inicial de la pestaña
+                pantalla.document.write(`
+                    <html>
+                    <head><title>Imagen ${currentIndex}</title></head>
+                    <body style="margin:0; display:flex; justify-content:center; align-items:center; height:100vh; background-color:#000;">
+                        <img id="imagen" src="imatges/${currentIndex}.png" style="max-width:100%; max-height:100%; cursor:pointer;">
+                    </body>
+                    </html>
+                `);
+        
+                pantalla.document.close();
+        
+                // Añadir un evento de clic en la imagen para avanzar a la siguiente
+                pantalla.onload = function () {
+                    const img = pantalla.document.getElementById("imagen");
+                    img.addEventListener("click", function () {
+                        currentIndex++; // Incrementar el índice
+                        img.src = `imatges/${currentIndex}.png`; // Cambiar la imagen
+                        pantalla.document.title = `Imagen ${currentIndex}`; // Actualizar el título
+                    });
+                };
+            } else {
+                alert("No se pudo abrir la nueva pestaña.");
             }
         });
-    } else {
-        alert("No se pudo abrir la nueva ventana.");
     }
 }
+
