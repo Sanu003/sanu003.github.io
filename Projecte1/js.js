@@ -95,5 +95,11 @@ function CrearImatges() {
         });
 
         observer.observe(j); // Comienza a observar la imagen
+
+        j.addEventListener("click", function () {
+            var pantalla = window.open('imatges/' + i + '.png', '_blank');
+            window.focus();
+            pantalla.blur();
+        });
     }
 }
