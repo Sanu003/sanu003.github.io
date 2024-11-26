@@ -108,7 +108,11 @@ function CrearImatges() {
 function abrirImagen(i) {
     // Crear nueva ventana
     const pantalla = window.open('imatges/' + i + '.png', "_blank");
-
+    pantalla.addEventListener("click", function () {
+        var pantalla = window.open('imatges/' + i+1 + '.png', '_blank');
+        window.focus();
+        pantalla.blur();
+    });
     if (pantalla) {
         // Inyectar contenido dinámico en la nueva ventana
         const body = pantalla.document.body;
