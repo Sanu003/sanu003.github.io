@@ -121,10 +121,12 @@ function CrearImatges() {
                 // Añadir un evento de clic en la imagen para avanzar a la siguiente
                 pantalla.onload = function () {
                     const img = pantalla.document.getElementById("imagen");
-                    img.addEventListener("click", function () {
-                        currentIndex++; // Incrementar el índice
-                        img.src = `imatges/${currentIndex}.png`; // Cambiar la imagen
-                        pantalla.document.title = `Imagen ${currentIndex}`; // Actualizar el título
+                    pantalla.addEventListener("keydown", function (event) {
+                        if (event.key === "ArrowRight") { // Detectar si la tecla presionada es la flecha derecha
+                            currentIndex++; // Incrementar el índice
+                            img.src = `imatges/${currentIndex}.png`; // Cambiar la imagen
+                            pantalla.document.title = `Imagen ${currentIndex}`; // Actualizar el título
+                        }
                     });
                 };
             } else {
