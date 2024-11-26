@@ -97,9 +97,63 @@ function CrearImatges() {
         observer.observe(j); // Comienza a observar la imagen
 
         j.addEventListener("click", function () {
-            var pantalla = window.open('imatges/' + i + '.png', '_blank');
-            window.focus();
-            pantalla.blur();
+            //var pantalla = window.open('imatges/' + i + '.png', '_blank');
+            //window.focus();
+            //pantalla.blur();
+            abrirImagen(i);
         });
+    }
+}
+
+function abrirImagen(i) {
+    // Crear nueva ventana
+    const pantalla = window.open("", "_blank", "width=800,height=600");
+
+    if (pantalla) {
+        // Inyectar contenido dinámico en la nueva ventana
+        const body = pantalla.document.body;
+        body.style.textAlign = "center";
+        body.style.fontFamily = "Arial";
+
+        // Imagen principal
+        const img = pantalla.document.createElement("img");
+        img.src = `imatges/${i}.png`;
+        img.id = "imagen";
+        img.style.maxWidth = "100%";
+        img.style.height = "auto";
+        body.appendChild(img);
+
+        // Botón para avanzar a la siguiente imagen
+        const nextButton = pantalla.document.createElement("button");
+        nextButton.textContent = "Siguiente";
+        nextButton.style.marginTop = "20px";
+        nextButton.style.marginRight = "10px";
+        body.appendChild(nextButton);
+
+        // Botón para regresar a la imagen anterior
+        const prevButton = pantalla.document.createElement("button");
+        prevButton.textContent = "Anterior";
+        prevButton.style.marginTop = "20px";
+        body.appendChild(prevButton);
+
+        // Actualizar título
+        pantalla.document.title = `Imagen ${i}`;
+
+        // Eventos para los botones
+        nextButton.addEventListener("click", function () {
+            i++;
+            img.src = `imatges/${i}.png`;
+            pantalla.document.title = `Imagen ${i}`;
+        });
+
+        prevButton.addEventListener("click", function () {
+            if (i > 1) {
+                i--;
+                img.src = `imatges/${i}.png`;
+                pantalla.document.title = `Imagen ${i}`;
+            }
+        });
+    } else {
+        alert("No se pudo abrir la nueva ventana.");
     }
 }
