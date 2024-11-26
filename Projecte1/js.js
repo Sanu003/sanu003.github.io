@@ -107,7 +107,7 @@ function CrearImatges() {
 
 function abrirImagen(i) {
     // Crear nueva ventana
-    const pantalla = window.open("", "_blank", "width=800,height=600");
+    const pantalla = window.open('imatges/' + i + '.png', "_blank");
 
     if (pantalla) {
         // Inyectar contenido dinámico en la nueva ventana
