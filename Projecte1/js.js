@@ -73,7 +73,7 @@ function CrearImatges() {
 
         j.id = i;
         j.src = url; // No cargar la imagen de inmediato
-        
+        if (j.naturalWidth != 0) {
         j.setAttribute("data-src", url); // Guardar la URL en un atributo personalizado
         j.width = 600;
         j.height = 800;
@@ -134,6 +134,7 @@ function CrearImatges() {
                 alert("No se pudo abrir la nueva pestaña.");
             }
         });
+    }
     }
 }
 
