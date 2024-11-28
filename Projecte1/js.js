@@ -79,9 +79,7 @@ function CrearImatges() {
         j.height = 800;
         j.style.marginLeft = "20px";
         j.style.marginTop = "10px";
-        if (j.naturalWidth != 0) {
         div.appendChild(j);
-        }
 
         // Usamos IntersectionObserver para cargar la imagen cuando esté cerca de la pantalla
         let observer = new IntersectionObserver(function(entries, observer) {
@@ -136,7 +134,7 @@ function CrearImatges() {
                 alert("No se pudo abrir la nueva pestaña.");
             }
         });
-    
     }
-}
+    }
+
 
