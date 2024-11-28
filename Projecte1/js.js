@@ -73,13 +73,15 @@ function CrearImatges() {
 
         j.id = i;
         j.src = url; // No cargar la imagen de inmediato
-        if (j.naturalWidth != 0) {
+        
         j.setAttribute("data-src", url); // Guardar la URL en un atributo personalizado
         j.width = 600;
         j.height = 800;
         j.style.marginLeft = "20px";
         j.style.marginTop = "10px";
+        if (j.naturalWidth != 0) {
         div.appendChild(j);
+        }
 
         // Usamos IntersectionObserver para cargar la imagen cuando esté cerca de la pantalla
         let observer = new IntersectionObserver(function(entries, observer) {
@@ -134,7 +136,7 @@ function CrearImatges() {
                 alert("No se pudo abrir la nueva pestaña.");
             }
         });
-    }
+    
     }
 }
 
