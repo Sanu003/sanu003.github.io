@@ -72,36 +72,37 @@ function CrearImatges() {
         }
 
         j.id = i;
-        j.src = ''; // No cargar la imagen de inmediato
-        j.setAttribute("data-src", url); // Guardar la URL en un atributo personalizado
-        j.width = 600;
-        j.height = 800;
-        j.style.marginLeft = "20px";
-        j.style.marginTop = "10px";
-        div.appendChild(j);
-
-        // Usamos IntersectionObserver para cargar la imagen cuando esté cerca de la pantalla
-        let observer = new IntersectionObserver(function(entries, observer) {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    // Cargar la imagen cuando entra en la vista
-                    entry.target.src = entry.target.getAttribute("data-src");
-                    observer.unobserve(entry.target); // Dejar de observar la imagen una vez cargada
-                }
+        j.src = url; // No cargar la imagen de inmediato
+        if(j.height!=0){
+            j.setAttribute("data-src", url); // Guardar la URL en un atributo personalizado
+            j.width = 600;
+            j.height = 800;
+            j.style.marginLeft = "20px";
+            j.style.marginTop = "10px";
+            div.appendChild(j);
+            
+            // Usamos IntersectionObserver para cargar la imagen cuando esté cerca de la pantalla
+            let observer = new IntersectionObserver(function(entries, observer) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Cargar la imagen cuando entra en la vista
+                        entry.target.src = entry.target.getAttribute("data-src");
+                        observer.unobserve(entry.target); // Dejar de observar la imagen una vez cargada
+                    }
+                });
+            }, {
+                rootMargin: '1500px', // Activar la carga antes de que entre completamente en la vista
+                threshold: 0 // Cargar la imagen cuando esté al 10% visible
             });
-        }, {
-            rootMargin: '1500px', // Activar la carga antes de que entre completamente en la vista
-            threshold: 0 // Cargar la imagen cuando esté al 10% visible
-        });
 
-        observer.observe(j); // Comienza a observar la imagen
+            observer.observe(j); // Comienza a observar la imagen
 
-        /**j.addEventListener("click", function () {
+            /**j.addEventListener("click", function () {
             var pantalla = window.open('imatges/' + i + '.png', '_blank');
             window.focus();
             pantalla.blur();
-        });**/
-        j.addEventListener("click", function () {
+            });**/
+            j.addEventListener("click", function () {
             let currentIndex = i; // Guardar el índice actual
             const pantalla = window.open("", "_blank"); // Sin opciones, abre una pestaña
         
@@ -132,7 +133,8 @@ function CrearImatges() {
             } else {
                 alert("No se pudo abrir la nueva pestaña.");
             }
-        });
+            });
+        }
     }
 }
 
